@@ -48,3 +48,44 @@ with st.expander("Data Visualization and analysis"):
 11- People who work 40 hours per week are the most profitable for more than 50 thousand annually
 
 12- People whose native-country is 'united-states' are the most profitable for more than 50 thousand annually""")
+    
+with st.sidebar:
+    st.header('Input Features')
+    age = st.slider('age (year)', 1, 90)
+    workclass = st.selectbox('workclass', data['workclass'].unique())
+    education_level = st.selectbox('education_level', data['education_level'].unique())
+    education_num = st.slider('education-num (integer)', 1, 20)
+    marital_status = st.selectbox('marital-status', data['marital-status'].unique())
+    occupation = st.selectbox('occupation', data['occupation'].unique())
+    relationship = st.selectbox('relationship', data['relationship'].unique())
+    race = st.selectbox('race', data['race'].unique())
+    sex = st.selectbox('sex', data['sex'].unique())
+    capital_gain = st.slider('capital-gain (dolar)', 1.0, 50000.0)
+    capital_loss = st.slider('capital-loss (dolar)', 1.0, 50000.0)
+    hours_per_week = st.slider('hours-per-week (hours)', 1, 100)
+    native_country = st.selectbox('native-country', data['native-country'].unique())
+
+    # Create a DataFrame for the input features
+    features = {'age': age,
+            'workclass': workclass,
+            'education_level': education_level,
+            'education-num': education_num,
+            'marital-status': marital_status,
+            'occupation': occupation,
+            'relationship': relationship,
+            'race': race,
+            'sex': sex,
+            'capital-gain': capital_gain,
+            'capital-loss': capital_loss,
+            'hours-per-week': hours_per_week,
+            'native-country': native_country
+            }
+    input_df = pd.DataFrame(features, index=[0])
+    # input_penguins = pd.concat([input_df, X_raw], axis=0)
+
+with st.expander('Input features'):
+    input_df
+
+
+    
+    

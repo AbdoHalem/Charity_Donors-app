@@ -1,7 +1,7 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Hello ! Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+st.title('🤖 Machine Learning App')
+st.info('This is app predicts the annual salary of a person whether is is more than 50K dollars or less !')
 
+with st.expander("Data"):
+    

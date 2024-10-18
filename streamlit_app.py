@@ -2,6 +2,8 @@ from matplotlib import pyplot as plt
 import streamlit as st
 import pandas as pd
 import seaborn as sb
+import joblib
+from finding_donors import predection_fun
 st.title('🤖 Machine Learning App')
 st.info('This is app predicts the annual salary of a person whether is is more than 50K dollars or less !')
 
@@ -81,11 +83,19 @@ with st.sidebar:
             'native-country': native_country
             }
     input_df = pd.DataFrame(features, index=[0])
-    # input_penguins = pd.concat([input_df, X_raw], axis=0)
 
 with st.expander('Input features'):
     input_df
 
+# Load the model and preprocessing objects
+model = joblib.load('charity_model.pkl')
+encoder = joblib.load('encoder.pkl')
+normalizer = joblib.load('normalizer.pkl')
+
+# Make predictions using the refactored function
+if st.button('Predict'):
+    prediction = predection_fun(row, model, encoder, normalizer)
+    st.write(f'Prediction: {prediction}')
 
     
     

@@ -4,6 +4,7 @@ import pandas as pd
 import seaborn as sb
 import joblib
 from finding_donors import predection_fun
+
 st.title('🤖 Machine Learning App')
 st.info('This is app predicts the annual salary of a person whether is is more than 50K dollars or less !')
 

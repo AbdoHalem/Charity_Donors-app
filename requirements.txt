@@ -3,4 +3,4 @@ pandas
 seaborn
 matplotlib
 joblib
-sklearn
+scikit-learn==0.24.2

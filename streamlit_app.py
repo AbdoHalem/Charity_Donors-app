@@ -4,12 +4,12 @@ import streamlit as st
 import pandas as pd
 import seaborn as sb
 import joblib
-# from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans
 
 # from finding_donors import predection_fun
 
 st.title('🤖 Machine Learning App')
-st.info('This is app predicts the annual salary of a person whether is is more than 50K dollars or less !')
+st.info('This is app predicts the annual salary of a person whether is more than 50K dollars or less !')
 
 with st.expander("Data"):
     st.write('**Raw Data**')

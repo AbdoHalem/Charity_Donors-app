@@ -141,6 +141,10 @@ def predection_fun(row, model, encoder, normalizer):
 # Make predictions using the refactored function
 if st.button('Predict'):
     prediction = predection_fun(input_df, model, encoder, normalizer)
-    st.write(f'Prediction: {prediction}')
+    if(prediction == 1):
+        st.write("# This person's annual salary is expected to be higher than 50k$")
+    else:
+        st.write("# This person's annual salary is expected to be less than 50k$")
+
 
     

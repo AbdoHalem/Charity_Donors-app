@@ -5,6 +5,7 @@ import pandas as pd
 import seaborn as sb
 import joblib
 from sklearn.cluster import KMeans
+import altair as alt
 
 st.title('🤖 Machine Learning App')
 st.info('This is app predicts the annual salary of a person whether is more than 50K dollars or less !')

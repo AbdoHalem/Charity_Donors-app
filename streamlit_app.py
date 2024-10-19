@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import seaborn as sb
 import joblib
-from finding_donors import predection_fun
+# from finding_donors import predection_fun
 
 st.title('🤖 Machine Learning App')
 st.info('This is app predicts the annual salary of a person whether is is more than 50K dollars or less !')
@@ -93,9 +93,61 @@ model = joblib.load('charity_model.pkl')
 encoder = joblib.load('encoder.pkl')
 normalizer = joblib.load('normalizer.pkl')
 
-# Make predictions using the refactored function
-if st.button('Predict'):
-    prediction = predection_fun(input_df, model, encoder, normalizer)
-    st.write(f'Prediction: {prediction}')
+# def predection_fun(row, model, encoder, normalizer):
+#     # Add predicted row to the original dataframe
+#     original_data = pd.read_csv("census.csv")
+#     original_data = original_data.append(row, ignore_index=True)
+#     # First fill nan value in 'income' column of the last row
+#     original_data['income'] = original_data['income'].fillna("<=50K").astype(str)
+#     # Convert income to numerical values
+#     original_data.loc[original_data ['income'] == "<=50K", 'income'] = 0
+#     original_data.loc[original_data ['income'] == ">50K", 'income'] = 1
+    
+#     # Get the mean of numerical columns
+#     numerical_cols = original_data.select_dtypes(include= ['float64', 'int64']).copy()
+#     mean_col = original_data[numerical_cols.columns].mean()
+#     null_columns = original_data[numerical_cols.columns]
+#     null_columns = null_columns.columns[null_columns.isnull().sum() > 0]
+#     # Fill nan values with the mean of its column
+#     original_data[null_columns] = original_data[null_columns].fillna(mean_col[null_columns])
+#     # Drop nan values in categorical data
+#     original_data = original_data.dropna(subset = catg_col)
+
+#     # Apply log transform for skewed data as preprocessing
+#     skewed_cols = abs(numerical_cols.skew() > 0.5)
+#     skewed_cols = skewed_cols[skewed_cols == True].index
+#     original_data[skewed_cols] = np.log1p(original_data[skewed_cols])
+
+#     # Normalize the numerical data
+#     numerical_cols = original_data.select_dtypes(include= ['float64', 'int64']).copy()
+#     original_data[numerical_cols.columns] = normalizer.transform(numerical_cols)
+
+#     # Convert categorical data to numerical
+#     categorical_cols = original_data.drop(numerical_cols.columns, axis=1).columns
+#     feature_coded = encoder.transform(original_data[categorical_cols])
+#     encoded_df = pd.DataFrame(feature_coded, columns=encoder.get_feature_names(categorical_cols), index=original_data.index)
+#     original_data = pd.concat([original_data[numerical_cols.columns], encoded_df], axis=1)
+
+#     # Data Clustering: First remove 'income' column
+#     if 'income' in original_data.columns:
+#         original_data.drop('income', axis=1, inplace=True)
+
+#     # Check for NaNs again before clustering
+#     if original_data.isnull().values.any():
+#         raise ValueError("Data still contains NaN values")
+    
+#     kmeans = KMeans(n_clusters = 7, init = 'k-means++', random_state = 42)
+#     y_kmeans = kmeans.fit_predict(original_data)
+#     cluster = pd.Series(data=y_kmeans)
+#     cluster.index = original_data.index
+#     original_data["Cluster"] = cluster
+#     row_processed = original_data.iloc[original_data.shape[0]-1, :].to_frame().T    # Convert Series to DataFrame
+#     output = model.predict(row_processed)
+#     return output
+
+# # Make predictions using the refactored function
+# if st.button('Predict'):
+#     prediction = predection_fun(input_df, model, encoder, normalizer)
+#     st.write(f'Prediction: {prediction}')
 
     

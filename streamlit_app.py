@@ -100,14 +100,18 @@ def predection_fun(row, model, encoder, normalizer):
     # Add predicted row to the original dataframe
     original_data = pd.read_csv("census.csv")
     original_data = pd.concat([original_data, row], ignore_index=True)
+    st.write(original_data.columns)
     # First fill nan value in 'income' column of the last row
     original_data['income'] = original_data['income'].fillna("<=50K").astype(str)
     # Convert income to numerical values
-    original_data.loc[original_data ['income'] == "<=50K", 'income'] = 0
-    original_data.loc[original_data ['income'] == ">50K", 'income'] = 1
-    
+    original_data.loc[original_data['income'] == "<=50K", 'income'] = 0
+    original_data.loc[original_data['income'] == ">50K", 'income'] = 1
+    st.write(original_data.columns)
+    original_data['income'] = original_data['income'].astype(int)
     # Get the mean of numerical columns
     numerical_cols = original_data.select_dtypes(include= ['float64', 'int64']).copy()
+    st.write(original_data.dtypes)
+
     mean_col = original_data[numerical_cols.columns].mean()
     null_columns = original_data[numerical_cols.columns]
     null_columns = null_columns.columns[null_columns.isnull().sum() > 0]
@@ -123,7 +127,14 @@ def predection_fun(row, model, encoder, normalizer):
     original_data[skewed_cols] = np.log1p(original_data[skewed_cols])
 
     # Normalize the numerical data
-    numerical_cols = original_data.select_dtypes(include= ['float64', 'int64']).copy()
+    # numerical_cols = original_data.select_dtypes(include= ['float64', 'int64']).copy()
+    st.write(numerical_cols.columns)
+    # Check for feature consistency with the scaler
+    if len(numerical_cols.columns) != normalizer.n_features_in_:
+        for col in normalizer.feature_range:
+            if col not in numerical_cols.columns:
+                st.write(f"{col} is not in numerical_cols")
+                # numerical_cols[col] = 0  # or fill with appropriate value
     original_data[numerical_cols.columns] = normalizer.transform(numerical_cols)
 
     # Convert categorical data to numerical

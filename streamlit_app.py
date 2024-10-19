@@ -16,19 +16,7 @@ with st.expander("Data"):
     data
 
 with st.expander("Data Visualization and analysis"):
-    plt.figure(figsize=[25, 80])
-    for i in range(data.shape[1] - 1):
-        plt.subplot(data.shape[1] - 1, 1, i+1)
-        richPeople_data = data[data['income'] == ">50K"].copy()
-        sb.countplot(data=richPeople_data, x=data.columns[i])
-        plt.xlabel(f"{data.columns[i]}"); plt.ylabel("count")
-        if(i == 0):
-            plt.title("People earn more than 50K dollars")
-        if(data[data.columns[i]].value_counts().count() > 16):
-            plt.xticks(rotation=45)
-
-    # Display the plot in Streamlit
-    st.pyplot(plt)  # Use Streamlit's function to render the plot
+    st.image('output.png', caption='Relations between each column and number of people with annual salary > 50K dollars', use_column_width=True)
     st.write("""### These graphs show that
 1- People who are older than 30 years old and younger than 50 years old are the most profitable for more than 50 thousand annually
 

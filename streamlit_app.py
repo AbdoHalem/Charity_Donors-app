@@ -99,7 +99,7 @@ normalizer = joblib.load('normalizer.pkl')
 def predection_fun(row, model, encoder, normalizer):
     # Add predicted row to the original dataframe
     original_data = pd.read_csv("census.csv")
-    original_data = pd.concat([original_data, pd.DataFrame([row])], ignore_index=True)
+    original_data = pd.concat([original_data, row], ignore_index=True)
     # First fill nan value in 'income' column of the last row
     original_data['income'] = original_data['income'].fillna("<=50K").astype(str)
     # Convert income to numerical values

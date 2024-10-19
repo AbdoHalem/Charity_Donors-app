@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import seaborn as sb
 import joblib
+from sklearn.cluster import KMeans
+
 # from finding_donors import predection_fun
 
 st.title('🤖 Machine Learning App')

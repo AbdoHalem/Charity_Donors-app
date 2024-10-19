@@ -2,11 +2,8 @@ from matplotlib import pyplot as plt
 import streamlit as st
 import pandas as pd
 import seaborn as sb
-<<<<<<< HEAD
-=======
 import joblib
 from finding_donors import predection_fun
->>>>>>> fa41bb15a50c2fe8fa52d941eb04bb24073a7a19
 
 st.title('🤖 Machine Learning App')
 st.info('This is app predicts the annual salary of a person whether is is more than 50K dollars or less !')
@@ -98,7 +95,7 @@ normalizer = joblib.load('normalizer.pkl')
 
 # Make predictions using the refactored function
 if st.button('Predict'):
-    prediction = predection_fun(row, model, encoder, normalizer)
+    prediction = predection_fun(input_df, model, encoder, normalizer)
     st.write(f'Prediction: {prediction}')
 
     
